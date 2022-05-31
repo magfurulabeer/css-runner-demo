@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Runner Demo</title>
+  <style>
+
+    body {
+      background-color: #FBFEFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    main { 
+      width: 100%;
+      min-height: 100px;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .reversed {
+      flex-direction: row-reverse;
+    }
+
+    #tamagotchi {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+
+    #css-runner {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    iframe {
+      width: 60%;
+      aspect-ratio: 1;
+    }
+
+    textarea {
+      width: 60%;
+      height: 60%;
+      background-color: white;
+      padding: 20px;
+    }
+
+    #run-button {
+      margin-top: 25px;
+      width: 65%;
+      height: 100;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>
+    CSS Runner Demo
+  </h1>
+  <button id="reverse-button" onclick="reverse()">
+    Reverse
+  </button>
+
+  <main id="main">
+    <section id="tamagotchi">
+      <iframe id="screen" src="./tamagotchi.html" title="Tamagotchi" ></iframe>
+
+    </section>
+
+    <section id="css-runner">
+      <textarea id="css"></textarea>
+      <button id="run-button" onclick="runCSS()">
+        Run!
+      </button>
+    </section>
+
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  
+  <script src="./tabsupport.js"></script>
+  <script>
+    function reverse() {
+      const main = document.getElementById("main");
+      
+      main.className = main.className === "reversed" ? "" : "reversed";
+    }
+
+    function runCSS() {
+      // console.log("RUN")
+      // const screen = document.getElementById("screen");
+      // var head = screen.contentWindow.document.head;
+      // console.log(head)
+      const text = jQuery("#css").val();
+      console.log(text)
+
+      const head = jQuery("#screen").contents().find("head");
+      const css = '<style type="text/css">' +
+                text +
+                '</style>';
+                console.log(css);
+      jQuery(head).append(css);
+      // jQuery(head).append(css);
+
+      
+      // main.className = main.className === "reversed" ? "" : "reversed";
+    }
+    </script>
+</body>
+</html>
